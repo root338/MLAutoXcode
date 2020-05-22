@@ -33,7 +33,7 @@ mProjectIPAPath="${mProjectExportFolderPath}/${mIpaFolderName}"
 mBuildLogFolderPath="${mProjectExportFolderPath}/${mBuildLogFolderName}"
 
 ## exportOptionsPlist 路径
-mOptionsPlist=./exportOptionsPlist.plist
+mOptionsPlist=./exportOptionsPlistADHoc.plist
 
 ## 当前时间
 mDate=`date +%Y-%m-%d\ %H-%M-%S`
@@ -42,6 +42,10 @@ mDate=`date +%Y-%m-%d\ %H-%M-%S`
 mArchivePath="${mArchivePath}/${mTargetName}${mDate}.xcarchive"
 ## .ipa 文件夹完整路径
 mProjectIPAPath="${mProjectIPAPath}/${mTargetName} ${mDate}"
+
+## .ipa 文件路径
+mProjectIPAFilePath="${mProjectIPAPath}/${mTargetName}.ipa"
+
 ## 输出日志完整路径
 mBuildLogPath="${mBuildLogFolderPath}/${mTargetName} ${mDate}.log"
 
@@ -86,6 +90,11 @@ if [ -d "${mArchivePath}" ]; then
 ## 如果 .ipa 文件导出成功
         echo "export .ipa success, path: ${mProjectIPAPath}"
         echo "Log Path: ${mBuildLogPath}"
+
+        echo "upload to pgyer"
+#        curl -F "file=@${mProjectIPAFilePath}" -F "uKey=4ab178f2c28e203e00c41debc7ca3cec" -F "_api_key=1cb430eacccc26edb8e353a3f1ee21c9" https://qiniu-storage.pgyer.com/apiv1/app/upload
+
+
         echo "end"
     else
         echo "export .ipa faild，${mErrorLogInfo}"
